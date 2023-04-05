@@ -31,22 +31,22 @@ const routes = [
       ...materialRoutes,
       // dashboard route
       {
-        path: '/dashboard/subscription',
+        path: 'xipat-testings/dashboard/subscription',
         element: <Analytics chart={'subscription'} />,
         auth: authRoles.admin
       },
       {
-        path: '/dashboard/revenue',
+        path: 'xipat-testings/dashboard/revenue',
         element: <Analytics chart={'revenue'} />,
         auth: authRoles.admin
       },
       {
-        path: '/post-management',
+        path: 'xipat-testings/post-management',
         element: <PostManagementPage />,
         auth: authRoles.admin
       },
       {
-        path: '/Setting',
+        path: 'xipat-testings/Setting',
         element: <SettingPage />,
         auth: authRoles.admin
       }

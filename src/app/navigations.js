@@ -1,7 +1,15 @@
 export const navigations = [
-  { name: 'Dashboard', path: '/dashboard/subscription', icon: 'dashboard' },
-  { name: 'Post Management', path: '/post-management', icon: 'pages' },
-  { name: 'Setting', path: '/setting', icon: 'build' }
+  {
+    name: 'Dashboard',
+    path: '/xipat-testings/dashboard/subscription',
+    icon: 'dashboard'
+  },
+  {
+    name: 'Post Management',
+    path: '/xipat-testings/post-management',
+    icon: 'pages'
+  },
+  { name: 'Setting', path: '/xipat-testings/setting', icon: 'build' }
   // { label: 'PAGES', type: 'label' },
   // {
   //   name: 'Session/Auth',

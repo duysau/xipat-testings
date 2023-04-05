@@ -17,7 +17,7 @@ const Analytics = ({ chart }) => {
   const navigate = useNavigate();
 
   const handleCTAButton = (path) => {
-    navigate(`/dashboard/${path.toLowerCase()}`);
+    navigate(`/xipat-testing/dashboard/${path.toLowerCase()}`);
   };
 
   const location = useLocation();
@@ -40,7 +40,7 @@ const Analytics = ({ chart }) => {
             </Button>
           ))}
         </Box>
-        {path === '/dashboard/subscription' ? (
+        {path === '/xipat-testings/dashboard/subscription' ? (
           <LineChart
             height="350px"
             color={[theme.palette.primary.main, theme.palette.primary.light]}

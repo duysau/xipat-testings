@@ -38,6 +38,7 @@
     "echarts": "^5.4.1",
     "echarts-for-react": "^3.0.2",
     "formik": "^2.2.9",
+    "gh-pages": "^5.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "notistack": "^3.0.1",
@@ -60,8 +61,6 @@
     "babel-plugin-import": "^1.13.6",
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
-    "gh-pages": "^5.0.0",
     "react-app-rewired": "^2.2.1"
-  },
-  "homepage": "http://duysau.github.io/xipat-testings/"
+  }
 }
