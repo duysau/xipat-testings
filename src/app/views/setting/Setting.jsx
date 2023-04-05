@@ -53,7 +53,8 @@ export default function SettingPage() {
 
   const SettingSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-    email: Yup.string().email('Invalid email').required('Required')
+    email: Yup.string().email('Invalid email').required('Required'),
+    backgroundColor: Yup.string().required('Required')
   });
   return (
     <Fragment>
@@ -140,6 +141,9 @@ export default function SettingPage() {
                         </FormControl>
                       )}
                     </Field>
+                    {errors.backgroundColor && touched.backgroundColor ? (
+                      <Typography color={'red'}>{errors.backgroundColor}</Typography>
+                    ) : null}
                     <Popover
                       id={id}
                       open={open}
@@ -174,7 +178,9 @@ export default function SettingPage() {
                       </FormControl>
                     )}
                   </Field>
-
+                  {errors.email && touched.email ? (
+                    <Typography color={'red'}>{errors.email}</Typography>
+                  ) : null}
                   <Field name="activeDate">
                     {({ field, form }) => (
                       <FormControl>
