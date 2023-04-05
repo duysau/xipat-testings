@@ -59,7 +59,7 @@ const routes = [
   { path: '/session/signup', element: <JwtRegister /> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
 
-  { path: '/', element: <Navigate to="dashboard/default" /> },
+  { path: '/', element: <Navigate to="xipat-testings/dashboard/subscription" /> },
   { path: '*', element: <NotFound /> }
 ];
 

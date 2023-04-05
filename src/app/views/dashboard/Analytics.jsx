@@ -17,7 +17,7 @@ const Analytics = ({ chart }) => {
   const navigate = useNavigate();
 
   const handleCTAButton = (path) => {
-    navigate(`/xipat-testing/dashboard/${path.toLowerCase()}`);
+    navigate(`/xipat-testings/dashboard/${path.toLowerCase()}`);
   };
 
   const location = useLocation();
