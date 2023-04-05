@@ -17,6 +17,8 @@ const AppEchart = Loadable(lazy(() => import('app/views/charts/echarts/AppEchart
 
 // dashboard page
 const Analytics = Loadable(lazy(() => import('app/views/dashboard/Analytics')));
+const PostManagementPage = Loadable(lazy(() => import('app/views/PostManagement/index')));
+const SettingPage = Loadable(lazy(() => import('app/views/setting/Setting')));
 
 const routes = [
   {
@@ -29,8 +31,18 @@ const routes = [
       ...materialRoutes,
       // dashboard route
       {
-        path: '/dashboard/default',
+        path: '/dashboard/',
         element: <Analytics />,
+        auth: authRoles.admin
+      },
+      {
+        path: '/post-management',
+        element: <PostManagementPage />,
+        auth: authRoles.admin
+      },
+      {
+        path: '/Setting',
+        element: <SettingPage />,
         auth: authRoles.admin
       },
 
