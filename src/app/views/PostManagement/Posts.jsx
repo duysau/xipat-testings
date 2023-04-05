@@ -1,30 +1,27 @@
 /* eslint-disable */
-import React, { useState } from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import {
   Box,
   Button,
   Card,
   IconButton,
   Input,
-  Paper,
+  MenuItem,
   Select,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
   Tooltip,
   Typography
 } from '@mui/material';
+import { useState } from 'react';
 import { useGlobalFilter, usePagination, useSortBy, useTable } from 'react-table';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import FeedIcon from '@mui/icons-material/Feed';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DetailProductModal from './PostDetail';
 
 const headerGroup = [
@@ -56,7 +53,6 @@ export const Posts = ({ tableData }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const ButtonDetailProduct = ({ product }) => {
-    console.log('product', product);
     return (
       <>
         <Button variant="contained" onClick={() => setOpenModal(true)}>
@@ -179,15 +175,6 @@ export const Posts = ({ tableData }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={tableData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
       <Box display={'flex'} justifyContent="space-between" m={4} alignItems="center">
         <Box display={'flex'}>
           <Tooltip title="First Page">
@@ -224,9 +211,9 @@ export const Posts = ({ tableData }) => {
             }}
           >
             {[10, 20, 30, 40, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
+              <MenuItem key={pageSize} value={pageSize}>
                 Show {pageSize}
-              </option>
+              </MenuItem>
             ))}
           </Select>
         </Box>
