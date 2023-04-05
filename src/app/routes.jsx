@@ -31,8 +31,13 @@ const routes = [
       ...materialRoutes,
       // dashboard route
       {
-        path: '/dashboard/',
-        element: <Analytics />,
+        path: '/dashboard/subscription',
+        element: <Analytics chart={'subscription'} />,
+        auth: authRoles.admin
+      },
+      {
+        path: '/dashboard/revenue',
+        element: <Analytics chart={'revenue'} />,
         auth: authRoles.admin
       },
       {
@@ -44,13 +49,6 @@ const routes = [
         path: '/Setting',
         element: <SettingPage />,
         auth: authRoles.admin
-      },
-
-      // e-chart rooute
-      {
-        path: '/charts/echarts',
-        element: <AppEchart />,
-        auth: authRoles.editor
       }
     ]
   },

@@ -1,7 +1,7 @@
 export const navigations = [
-  { name: 'Dashboard', path: '/dashboard', icon: 'dashboard' },
-  { name: 'Post Management', path: '/post-management', icon: 'dashboard' },
-  { name: 'Setting', path: '/setting', icon: 'dashboard' },
+  { name: 'Dashboard', path: '/dashboard/subscription', icon: 'dashboard' },
+  { name: 'Post Management', path: '/post-management', icon: 'pages' },
+  { name: 'Setting', path: '/setting', icon: 'build' }
   // { label: 'PAGES', type: 'label' },
   // {
   //   name: 'Session/Auth',
@@ -35,11 +35,7 @@ export const navigations = [
   //     { name: 'Table', path: '/material/table', iconText: 'T' }
   //   ]
   // },
-  {
-    name: 'Charts',
-    icon: 'trending_up',
-    children: [{ name: 'Echarts', path: '/charts/echarts', iconText: 'E' }]
-  }
+
   // {
   //   name: 'Documentation',
   //   icon: 'launch',

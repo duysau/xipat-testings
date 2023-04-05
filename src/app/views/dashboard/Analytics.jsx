@@ -1,47 +1,56 @@
-import { styled, useTheme } from '@mui/material';
+import { Box, Button, styled, useTheme } from '@mui/material';
+import { getRoutePath } from 'app/utils/utils';
 import { Fragment } from 'react';
-import LineChart from './LineChart';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ComparisonChart from './ColumnChart';
+import LineChart from './LineChart';
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
   [theme.breakpoints.down('sm')]: { margin: '16px' }
 }));
 
-const Title = styled('span')(() => ({
-  fontSize: '1rem',
-  fontWeight: '500',
-  marginRight: '.5rem',
-  textTransform: 'capitalize'
-}));
+const CTAButton = ['Subscription', 'Revenue'];
 
-const SubTitle = styled('span')(({ theme }) => ({
-  fontSize: '0.875rem',
-  color: theme.palette.text.secondary
-}));
-
-const H4 = styled('h4')(({ theme }) => ({
-  fontSize: '1rem',
-  fontWeight: '500',
-  marginBottom: '16px',
-  textTransform: 'capitalize',
-  color: theme.palette.text.secondary
-}));
-
-const Analytics = () => {
+const Analytics = ({ chart }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const handleCTAButton = (path) => {
+    navigate(`/dashboard/${path.toLowerCase()}`);
+  };
+
+  const location = useLocation();
+  const params = useParams();
+  const path = getRoutePath(location, params);
 
   return (
     <Fragment>
       <ContentBox className="analytics">
-        <LineChart
-          height="350px"
-          color={[theme.palette.primary.main, theme.palette.primary.light]}
-        />
-        <ComparisonChart
-          height="350px"
-          color={[theme.palette.primary.dark, theme.palette.primary.light]}
-        />
+        <Box display={'flex'}>
+          {CTAButton.map((button) => (
+            <Button
+              variant="outlined"
+              key={button}
+              color={chart.toLowerCase().includes(button.toLowerCase()) ? 'primary' : 'inherit'}
+              sx={{ mr: 2 }}
+              onClick={() => handleCTAButton(button)}
+            >
+              {button}
+            </Button>
+          ))}
+        </Box>
+        {path === '/dashboard/subscription' ? (
+          <LineChart
+            height="350px"
+            color={[theme.palette.primary.main, theme.palette.primary.light]}
+          />
+        ) : (
+          <ComparisonChart
+            height="350px"
+            color={[theme.palette.primary.dark, theme.palette.primary.light]}
+          />
+        )}
       </ContentBox>
     </Fragment>
   );

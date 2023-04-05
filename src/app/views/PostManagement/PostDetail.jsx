@@ -19,7 +19,7 @@ const DetailProductModal = ({ isOpen, onClose, product }) => {
       aria-labelledby="parent-modal-title"
       aria-describedby="parent-modal-description"
     >
-      <Box sx={{ ...style, width: 400 }}>
+      <Box sx={{ ...style, width: ['300px', '400px'] }}>
         <h2 id="parent-modal-title">Product's detail</h2>
         <Grid container spacing={2}>
           <Grid xs={6}>

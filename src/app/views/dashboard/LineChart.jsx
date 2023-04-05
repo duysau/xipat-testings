@@ -44,8 +44,8 @@ const LineChart = ({ height, color = [] }) => {
       {
         data: [30, 40, 20, 50, 40, 80, 90],
         type: 'line',
-        stack: 'This month',
-        name: 'This month',
+        stack: '7 days',
+        name: 'SUBSCRIBER in 7 days',
         smooth: true,
         symbolSize: 4,
         lineStyle: { width: 4 }

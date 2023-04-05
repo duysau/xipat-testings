@@ -14,6 +14,7 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Popover,
   TextField,
   Typography,
   styled
@@ -24,6 +25,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import { DateRange } from '@mui/lab';
 import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField';
+import moment from 'moment/moment';
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -32,11 +34,21 @@ const ContentBox = styled('div')(({ theme }) => ({
 
 export default function SettingPage() {
   const [backgroundColor, setBackgroundColor] = useState('#000000');
-  const [isShowColorPicker, setIsShowColorPicker] = useState(false);
-  const [value, setValue] = useState([null, null]);
-
+  const [valueDateTimeRage, setValueDateTimeRage] = useState([null, null]);
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  
   const handleChangeComplete = (color) => {
     setBackgroundColor(color.hex);
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClickPopOver = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClosePopOver = () => {
+    setAnchorEl(null);
   };
 
   const SettingSchema = Yup.object().shape({
@@ -57,7 +69,10 @@ export default function SettingPage() {
               console.log('title', values.title);
               console.log('email', values.email);
               console.log('background color', backgroundColor);
-              console.log('active date', value);
+              console.log(
+                'active date',
+                valueDateTimeRage.map((item) => moment(item.$d).format('MM/DD/YYYY'))
+              );
               actions.setSubmitting(false);
             }, 1000);
           }}
@@ -66,7 +81,7 @@ export default function SettingPage() {
             <Form>
               <Box
                 display={'flex'}
-                flexDirection={'row'}
+                flexDirection={['column', 'row']}
                 width={'100%'}
                 justifyContent={'space-between'}
                 alignItems={'center'}
@@ -75,7 +90,7 @@ export default function SettingPage() {
                   <Field name="title">
                     {({ field, form }) => (
                       <FormControl
-                        isInvalid={form.errors.name && form.touched.name}
+                        isInvalid={form.errors.title && form.touched.title}
                         mb={4}
                         sx={{ mb: 2 }}
                       >
@@ -96,7 +111,8 @@ export default function SettingPage() {
                   <Box position={'relative'}>
                     <Field name="backgroundColor" id="backgroundColor">
                       {({ field }) => (
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+                          <InputLabel htmlFor="backgroundColor">Background Color</InputLabel>
                           <OutlinedInput
                             {...field}
                             id="backgroundColor"
@@ -112,7 +128,7 @@ export default function SettingPage() {
                                 <IconButton aria-label="toggle password visibility" edge="end">
                                   <Box
                                     bgcolor={backgroundColor}
-                                    onClick={() => setIsShowColorPicker(!isShowColorPicker)}
+                                    onClick={handleClickPopOver}
                                     width={'20px'}
                                     height={'20px'}
                                   />
@@ -124,16 +140,23 @@ export default function SettingPage() {
                         </FormControl>
                       )}
                     </Field>
-                    {isShowColorPicker && (
-                      <Box position={'absolute'} left={'100px'}>
-                        <SketchPicker
-                          color={backgroundColor}
-                          onChangeComplete={(color) => {
-                            handleChangeComplete(color);
-                          }}
-                        />
-                      </Box>
-                    )}
+                    <Popover
+                      id={id}
+                      open={open}
+                      anchorEl={anchorEl}
+                      onClose={handleClosePopOver}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left'
+                      }}
+                    >
+                      <SketchPicker
+                        color={backgroundColor}
+                        onChangeComplete={(color) => {
+                          handleChangeComplete(color);
+                        }}
+                      />
+                    </Popover>
                   </Box>
                 </Box>
                 <Box display={'flex'} flexDirection={'column'} width={'100%'} ml={4}>
@@ -141,13 +164,13 @@ export default function SettingPage() {
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.email && form.touched.email} mb={4}>
                         <TextField
+                          autoComplete={false}
                           {...field}
                           id="email"
                           label="Email"
                           placeholder="Email"
                           borderColor={errors.email && 'red'}
                         />
-                        {/* <FormErrorMessage>{form.errors.title}</FormErrorMessage> */}
                       </FormControl>
                     )}
                   </Field>
@@ -159,8 +182,8 @@ export default function SettingPage() {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DateRangePicker
                             slots={{ field: SingleInputDateRangeField }}
-                            value={value}
-                            onChange={(newValue) => setValue(newValue)}
+                            value={valueDateTimeRage}
+                            onChange={(newValue) => setValueDateTimeRage(newValue)}
                           />
                         </LocalizationProvider>
                       </FormControl>

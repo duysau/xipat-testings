@@ -132,3 +132,19 @@ export function getTimeDifference(date) {
   else if (difference < 86400 * 30 * 12) return `${Math.floor(difference / 86400 / 30)} mon`;
   else return `${(difference / 86400 / 30 / 12).toFixed(1)} y`;
 }
+
+export const getRoutePath = (location, params) => {
+  const { pathname } = location;
+
+  if (!Object.keys(params).length) {
+    return pathname; // we don't need to replace anything
+  }
+
+  let path = pathname;
+  Object.entries(params).forEach(([paramName, paramValue]) => {
+    if (paramValue) {
+      path = path.replace(paramValue, `:${paramName}`);
+    }
+  });
+  return path;
+};
