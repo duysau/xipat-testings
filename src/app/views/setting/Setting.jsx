@@ -35,13 +35,13 @@ const ContentBox = styled('div')(({ theme }) => ({
 export default function SettingPage() {
   const [backgroundColor, setBackgroundColor] = useState('#000000');
   const [valueDateTimeRage, setValueDateTimeRage] = useState([null, null]);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-  
+
   const handleChangeComplete = (color) => {
     setBackgroundColor(color.hex);
   };
-  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClickPopOver = (event) => {
     setAnchorEl(event.currentTarget);
